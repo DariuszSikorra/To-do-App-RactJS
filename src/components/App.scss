@@ -1,0 +1,36 @@
+* {
+  text-align: center;
+  background-color: lightgray;
+}
+@mixin borders {
+    border: 1px solid black;
+        border-radius: 3px;
+        background-color: rgb(118, 250, 41)
+}
+.form {
+    input {
+        @include borders
+    }
+    input:hover {
+        box-shadow: 2px 2px black
+    }
+    button {
+        @include borders
+    }
+    button:hover {
+        box-shadow: 2px 2px black
+    }
+}
+
+.tasks {
+    list-style: none;
+    text-align: left;
+    margin: 0 30vw;
+    padding: 5px;
+    button {
+        @include borders
+    }
+    button:hover {
+        box-shadow: 2px 2px black
+    }
+}
