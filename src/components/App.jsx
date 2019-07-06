@@ -105,7 +105,7 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <div className="container">
         <TaskForm addTask={this.addTask} />
         <hr />
         <Tasks
@@ -113,7 +113,7 @@ class App extends Component {
           handleDone={this.handleDone}
           handleDelete={this.handleDelete}
         />
-      </>
+      </div>
     );
   }
 }

@@ -15,7 +15,7 @@ const Tasks = props => {
 
   const doneTasksFilter = props.tasks
     .filter(task => task.status)
-    .sort((a, b) => -(a.dateOfCompletion - b.dateOfCompletion));
+    .sort((a, b) => b.dateOfCompletion - a.dateOfCompletion);
   console.log(doneTasksFilter);
   const doneTasks = doneTasksFilter.map(task => (
     <li className="tasks" key={task.id}>
