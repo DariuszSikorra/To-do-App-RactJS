@@ -1,6 +1,6 @@
 * {
   text-align: center;
-  background-color: lightgray;
+  background-color: #cc99ff;
   .container {
       width: 50vw;
       margin: auto;
@@ -9,7 +9,8 @@
 @mixin borders {
   border: 1px solid black;
   border-radius: 3px;
-  background-color: rgb(118, 250, 41);
+  background-color: #280051;
+  color: #cc99ff;
 }
 .form {
   input {

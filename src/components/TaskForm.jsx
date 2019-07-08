@@ -48,6 +48,7 @@ class TaskForm extends Component {
               <span>Nazwa zadania: </span>
               <input
                 type="text"
+                placeholder="Wpisz nazwę"
                 onChange={this.handleNewTodoName}
                 value={this.state.name}
               />

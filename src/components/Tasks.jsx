@@ -1,31 +1,24 @@
 import React from "react";
 
-const Tasks = props => {
-  const undoneTasksFilter = props.tasks.filter(task => !task.status);
-  const undoneTasks = undoneTasksFilter.map(task => (
-    <li className="tasks" key={task.id}>
-      <strong style={task.important ? { color: "red" } : null}>
-        {task.name},{" "}
-      </strong>
-      <span>wykonać zadanie do: {task.dateTo} </span>
-      <button onClick={() => props.handleDone(task.id)}>Done</button>{" "}
-      <button onClick={() => props.handleDelete(task.id)}>X</button>
-    </li>
-  ));
+import UndoneTasks from "./UndoneTasks";
+import DoneTasks from "./DoneTasks";
 
-  const doneTasksFilter = props.tasks
+const Tasks = props => {
+  const undoneTasks = props.tasks
+    .filter(task => !task.status)
+    .map(task => (
+      <UndoneTasks
+        handleFadeout={props.handleFadeout}
+        handleDone={props.handleDone}
+        handleDelete={props.handleDelete}
+        task={task}
+      />
+    ));
+
+  const doneTasks = props.tasks
     .filter(task => task.status)
-    .sort((a, b) => b.dateOfCompletion - a.dateOfCompletion);
-  console.log(doneTasksFilter);
-  const doneTasks = doneTasksFilter.map(task => (
-    <li className="tasks" key={task.id}>
-      <strong>{task.name}, </strong>
-      <span>
-        Zostało wykonane: {new Date(task.dateOfCompletion).toLocaleString()}{" "}
-      </span>
-      <button onClick={() => props.handleDelete(task.id)}>X</button>
-    </li>
-  ));
+    .sort((a, b) => b.dateOfCompletion - a.dateOfCompletion)
+    .map(task => <DoneTasks task={task} handleDelete={props.handleDelete} />);
 
   return (
     <>

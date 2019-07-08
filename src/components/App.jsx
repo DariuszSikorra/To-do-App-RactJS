@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import TaskForm from "./TaskForm";
 import Tasks from "./Tasks";
 import "./App.scss";
@@ -103,6 +104,10 @@ class App extends Component {
     });
   };
 
+  handleFadeout = () => {
+    // alert("Działa")
+  }
+
   render() {
     return (
       <div className="container">
@@ -112,6 +117,7 @@ class App extends Component {
           tasks={this.state.tasks}
           handleDone={this.handleDone}
           handleDelete={this.handleDelete}
+          handleFadeout={this.handleFadeout}
         />
       </div>
     );
