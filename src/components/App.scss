@@ -38,3 +38,34 @@
     box-shadow: 2px 2px black;
   }
 }
+/////////////////////////////////
+.fade-appear {
+    opacity: 0;
+    z-index: 1;
+}
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  // transition: opacity 5000ms ease-in;
+}
+
+/* enter */
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    // transition: opacity 2500ms ease-in;
+}
+
+/* exit */
+.fade-exit {
+    opacity: 1;
+}
+.fade-exit.fade-exit-active {
+    opacity: 0;
+    // transition: opacity 2500ms ease-in;
+}
+.fade-exit-done {
+  opacity: 0;
+}

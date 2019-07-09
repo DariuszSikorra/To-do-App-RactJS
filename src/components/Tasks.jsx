@@ -1,24 +1,23 @@
 import React from "react";
 
-import UndoneTasks from "./UndoneTasks";
-import DoneTasks from "./DoneTasks";
+import Task from "./Task";
 
 const Tasks = props => {
+  //handling undone tasks
   const undoneTasks = props.tasks
     .filter(task => !task.status)
     .map(task => (
-      <UndoneTasks
-        handleFadeout={props.handleFadeout}
-        handleDone={props.handleDone}
-        handleDelete={props.handleDelete}
+      <Task
         task={task}
+        handleDelete={props.handleDelete}
+        handleDone={props.handleDone}
       />
     ));
-
+  // handling done tasks
   const doneTasks = props.tasks
     .filter(task => task.status)
     .sort((a, b) => b.dateOfCompletion - a.dateOfCompletion)
-    .map(task => <DoneTasks task={task} handleDelete={props.handleDelete} />);
+    .map(task => <Task task={task} handleDelete={props.handleDelete} />);
 
   return (
     <>
