@@ -1,83 +1,76 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class TaskForm extends Component {
-  state = {
-    name: "",
-    dateTo: "",
-    important: false,
+const TaskForm = props => {
+  const [name, setName] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [important, setImportant] = useState(false);
+
+  //State seting methods
+  const handleNewTodoName = e => {
+    const newName = e.target.value;
+    setName(newName);
   };
 
-  handleNewTodoName = e => {
-    this.setState({
-      name: e.target.value
-    });
+  const handleNewTodoDeadline = e => {
+    const newDateTo = e.target.value;
+    setDateTo(newDateTo);
   };
 
-  handleNewTodoDeadline = e => {
-    this.setState({
-      dateTo: e.target.value
-    });
+  const handleChecked = e => {
+    const newImportant = e.target.checked
+    setImportant(newImportant);
   };
-
-  handleChecked = e => {
-    this.setState({
-      important: e.target.checked
-    });
-  };
-
-  handleClick = () => {
-    if (this.state.dateTo && this.state.name.length > 4) {
-    this.props.addTask(this.state.name, this.state.dateTo, this.state.important)
-    this.setState({
-      name: "",
-      dateTo: "",
-      important: false,
-    })
+  
+  //Submit button
+  const handleClick = () => {
+    if (dateTo && name.length > 4) {
+      props.addTask(name, dateTo, important);
+      setName("");
+      setDateTo("");
+      setImportant(false);
     } else {
-      alert("Wypełnij pola właściwie")
+      alert("Wypełnij pola właściwie");
     }
-  }
+  };
 
-  render() {
-    return (
-      <div className="form">
-        <h2>Dodaj nowe zadanie</h2>
-        <div>
-          <label>
-            <p>
-              <span>Nazwa zadania: </span>
-              <input
-                type="text"
-                placeholder="Wpisz nazwę"
-                onChange={this.handleNewTodoName}
-                value={this.state.name}
-              />
-            </p>
-            <p>
-              <span>Dzień deadline'u: </span>
-              <input
-                type="date"
-                onChange={this.handleNewTodoDeadline}
-                value={this.state.dateTo}
-                min={new Date().toISOString().slice(0, 10)}
-              />
-            </p>
-            <p>
-              <label htmlFor="important">Oznaczyć zadanie jako ważne? </label>
-              <input
-                type="checkbox"
-                id="important"
-                name="important"
-                onChange={this.handleChecked}
-                checked={this.state.important}
-              />
-            </p>
-            <button onClick={this.handleClick}>Dodaj</button>
-          </label>
-        </div>
+  return (
+    <div className="form">
+      <h2>Dodaj nowe zadanie</h2>
+      <div>
+        <label>
+          <p>
+            <span>Nazwa zadania: </span>
+            <input
+              type="text"
+              placeholder="Wpisz nazwę"
+              onChange={handleNewTodoName}
+              value={name}
+            />
+          </p>
+          <p>
+            <span>Dzień deadline'u: </span>
+            <input
+              type="date"
+              onChange={handleNewTodoDeadline}
+              value={dateTo}
+              min={new Date().toISOString().slice(0, 10)}
+            />
+          </p>
+          <p>
+            <label htmlFor="important">Oznaczyć zadanie jako ważne? </label>
+            <input
+              type="checkbox"
+              id="important"
+              name="important"
+              onChange={handleChecked}
+              checked={important}
+            />
+          </p>
+          <button onClick={handleClick}>Dodaj</button>
+        </label>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default TaskForm;

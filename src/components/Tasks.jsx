@@ -3,6 +3,7 @@ import React from "react";
 import Task from "./Task";
 
 const Tasks = props => {
+  
   //handling undone tasks
   const undoneTasks = props.tasks
     .filter(task => !task.status)
@@ -13,6 +14,7 @@ const Tasks = props => {
         handleDone={props.handleDone}
       />
     ));
+    
   // handling done tasks
   const doneTasks = props.tasks
     .filter(task => task.status)

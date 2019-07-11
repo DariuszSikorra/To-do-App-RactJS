@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
 import TaskForm from "./TaskForm";
 import Tasks from "./Tasks";
 import "./App.scss";
 
-let tasks = [
+let oldTasks = [
   {
     id: 0,
     name: "Wydrukować grę planszową",
@@ -55,68 +55,57 @@ let tasks = [
   }
 ];
 
-class App extends Component {
-  state = {
-    counter: tasks.length,
-    tasks: []
-  };
+const App = () => {
+  const [counter, setCounter] = useState(oldTasks.length);
+  const [tasks, setTasks] = useState([]);
 
-  componentWillMount() {
-    this.setState({
-      tasks: [...tasks]
-    });
-  }
+  //Substitute of componentDidMount
+  useEffect(() => {
+    let tasks = oldTasks;
+    setTasks(tasks);
+  }, []);
 
-  addTask = (name, dateTo, important) => {
+  const addTask = (name, dateTo, important) => {
     const newTask = {
-      id: this.state.counter,
+      id: counter,
       name,
       dateTo,
       important,
       status: false,
       dateOfCompletion: null
     };
-    this.setState({
-      tasks: [...this.state.tasks, newTask],
-      counter: this.state.counter + 1
-    });
+    setCounter(counter + 1)
+    setTasks([...tasks, newTask])
   };
 
-  handleDelete = id => {
-    let tasks = this.state.tasks;
-    tasks = tasks.filter(task => task.id !== id);
-    this.setState({
-      tasks
-    });
+  const handleDelete = id => {
+    let newTasks = tasks.filter(task => task.id !== id);
+    setTasks(newTasks)
   };
 
-  handleDone = id => {
-    const tasks = Array.from(this.state.tasks);
+  const handleDone = id => {
+    const newTasks = Array.from(tasks);
     const date = new Date().getTime();
-    tasks.forEach(task => {
+    newTasks.forEach(task => {
       if (task.id === id) {
         task.status = true;
         task.dateOfCompletion = date;
       }
     });
-    this.setState({
-      tasks
-    });
+    setTasks(newTasks)
   };
 
-  render() {
-    return (
-      <div className="container">
-        <TaskForm addTask={this.addTask} />
-        <hr />
-        <Tasks
-          tasks={this.state.tasks}
-          handleDone={this.handleDone}
-          handleDelete={this.handleDelete}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="container">
+      <TaskForm addTask={addTask} />
+      <hr />
+      <Tasks
+        tasks={tasks}
+        handleDone={handleDone}
+        handleDelete={handleDelete}
+      />
+    </div>
+  );
+};
 
 export default App;
